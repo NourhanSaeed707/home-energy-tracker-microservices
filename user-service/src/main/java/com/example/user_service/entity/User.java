@@ -16,6 +16,6 @@ public class User {
     private String surname;
     private String email;
     private String address;
-    private String alerting;
+    private Boolean alerting;
     private double energyAlertingThreshold;
 }
