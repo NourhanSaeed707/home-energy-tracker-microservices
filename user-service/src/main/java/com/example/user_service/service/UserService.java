@@ -23,10 +23,17 @@ public class UserService {
                 .energyAlertingThreshold(userDto.getEnergyAlertingThreshold())
                 .build();
         User saved = userRepository.save(createdUser);
-        return userDto;
+        return toDto(saved);
     }
 
-    private UserDto updateUser(User user){
+    public UserDto getUserById(Long id) {
+        log.info("Retrieving user by id {}", id);
+        return userRepository.findById(id)
+                .map(this::toDto)
+                .orElse(null);
+    }
+
+    private UserDto toDto(User user){
         return UserDto.builder()
                 .id(user.getId())
                 .name(user.getName())
@@ -37,4 +44,6 @@ public class UserService {
                 .energyAlertingThreshold(user.getEnergyAlertingThreshold())
                 .build();
     }
+
+
 }
