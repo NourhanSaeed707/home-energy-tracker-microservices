@@ -11,7 +11,7 @@ public class UserDto {
     private String surname;
     private String email;
     private String address;
-    private Boolean isAlerting;
+    private Boolean alerting;
     private double energyAlertingThreshold;
 }
 
