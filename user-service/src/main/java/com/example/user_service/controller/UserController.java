@@ -28,4 +28,15 @@ public class UserController {
         }
         return ResponseEntity.ok(userDto);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto, @PathVariable Long id) {
+        try {
+            userService.updateUser(userDto, id);
+            return ResponseEntity.ok(userDto);
+        }catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
 }

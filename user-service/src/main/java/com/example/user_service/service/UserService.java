@@ -33,6 +33,18 @@ public class UserService {
                 .orElse(null);
     }
 
+    public void updateUser(UserDto userDto, Long id) {
+        log.info("Updating user {}", userDto);
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        user.setName(userDto.getName());
+        user.setSurname(userDto.getSurname());
+        user.setEmail(userDto.getEmail());
+        user.setAddress(userDto.getAddress());
+        user.setAlerting(userDto.getAlerting());
+        user.setEnergyAlertingThreshold(userDto.getEnergyAlertingThreshold());
+        userRepository.save(user);
+    }
+
     private UserDto toDto(User user){
         return UserDto.builder()
                 .id(user.getId())
@@ -44,6 +56,4 @@ public class UserService {
                 .energyAlertingThreshold(user.getEnergyAlertingThreshold())
                 .build();
     }
-
-
 }
